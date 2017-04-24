@@ -1,5 +1,6 @@
 import Node from '../structures/LinkedList'
 
 export const deleteMiddleNode = node => {
-	node = node.next
+    node.data = node.next.data
+    node.next = node.next.next
 }
