@@ -19,10 +19,10 @@ describe('2.5', () => {
         .appendToTail(9)
         .appendToTail(9)
 
-      //   123
-      // +9999
-      //------
-      // 10122 
+      //    123
+      // + 9999
+      //-------
+      //  10122 
 
       const expected = new Node(2)
         .appendToTail(2)
