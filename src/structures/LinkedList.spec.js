@@ -28,14 +28,4 @@ describe('Node', () => {
       expect(node).toBeA(Node)
     })
   })
-
-  describe('setNext()', () => {
-
-    it('should set the next node', () => {
-      let node = new Node(1)
-      const nextNode = new Node(2)
-      node.setNext(nextNode)
-      expect(node.next).toEqual(nextNode)
-    })
-  })
 })

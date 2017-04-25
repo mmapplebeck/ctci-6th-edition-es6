@@ -7,11 +7,11 @@ export const sumLists = (first, second, carry = 0) => {
   if (second !== null) sum += second.data
   let summed = new Node(sum % 10)
   if (first !== null || second !== null) {
-    summed.setNext(sumLists(
+    summed.next = sumLists(
       first == null ? null : first.next,
       second == null ? null : second.next,
       sum >= 10 ? 1 : 0
-    ))
+    )
   }
   return summed
 }

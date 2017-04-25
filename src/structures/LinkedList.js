@@ -12,7 +12,4 @@ export default class Node {
     n.next = end
     return this
   }
-  setNext(node) {
-    this.next = node
-  }
 }
