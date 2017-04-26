@@ -17,6 +17,7 @@ export const sumLists = (first, second, carry = 0) => {
 }
 
 export const getLength = list => {
+  if (list === null) return 0
   let head = list
   let length = 1
   while(head.next !== null) {

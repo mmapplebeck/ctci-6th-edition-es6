@@ -45,6 +45,10 @@ describe('2.5', () => {
 
       expect(funcs.getLength(list)).toEqual(3)
     })
+
+    it('should return 0 if list is null', () => {
+      expect(funcs.getLength(null)).toEqual(0)
+    })
   })
 
   describe('padList()', () => {
@@ -119,6 +123,16 @@ describe('2.5', () => {
       const actual = funcs.sumListsForward(first, second)
 
       expect(actual).toEqual(expected)
+    })
+
+    it('should handle one null list', () => {
+      const first = new Node(1).appendToTail(2)
+      const actual = funcs.sumListsForward(first, null)
+      expect(actual).toEqual(first)
+    })
+
+    it('should return null for two null lists', () => {
+      expect(funcs.sumListsForward(null, null)).toEqual(null)
     })
   })
 })
