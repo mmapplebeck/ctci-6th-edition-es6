@@ -58,7 +58,7 @@ export const getPartialSum = (first, second) => {
   }
 }
 
-export const sumListsForward = (first, second, prev = null) => {
+export const sumListsForward = (first, second) => {
   if (first === null && second === null) return null
   const l1 = getLength(first)
   const l2 = getLength(second)
