@@ -1,6 +1,16 @@
 import Node from '../structures/LinkedList'
 
-export const getIntersectingNodeIndex = (list1, list2) => {
+export const getKthNode = (list, k) => {
+  let head = list
+  let count = 0
+  while(head !== null && count !== k) {
+    head = head.next
+    count += 1
+  }
+  return head
+}
+
+export const getIntersectingNode = (list1, list2) => {
   let head1 = list1
   let head2 = list2
   let length1 = 0
@@ -16,5 +26,5 @@ export const getIntersectingNodeIndex = (list1, list2) => {
     }
   }
   if (head1 !== head2) return null
-  return Math.abs(length1 - length2) + 1
+  return getKthNode(length1 > length2 ? list1 : list2, Math.abs(length1 - length2) + 1)
 }

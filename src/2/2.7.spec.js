@@ -1,15 +1,29 @@
 import expect from 'expect'
 import Node from '../structures/LinkedList'
-import {getIntersectingNodeIndex} from './2.7'
+import {getIntersectingNode, getKthNode} from './2.7'
 
 describe('2.7', () => {
 
-  describe('getIntersectingNodeIndex()', () => {
+  describe('getKthNode()', () => {
+
+    it('should get the correct nodes', () => {
+      let node1 = new Node(1)
+      let node2 = new Node(2)
+      let node3 = new Node(3)
+      node1.next = node2
+      node2.next = node3
+      expect(getKthNode(node1, 0)).toEqual(node1)
+      expect(getKthNode(node1, 1)).toEqual(node2)
+      expect(getKthNode(node1, 2)).toEqual(node3)
+    })
+  })
+  
+  describe('getIntersectingNode()', () => {
 
     it('should return null if lists do not intersect', () => {
       const list1 = new Node(1)
       const list2 = new Node(2).appendToTail(3)
-      const actual = getIntersectingNodeIndex(list1, list2)
+      const actual = getIntersectingNode(list1, list2)
       expect(actual).toEqual(null)
     })
 
@@ -21,9 +35,8 @@ describe('2.7', () => {
       list2.next.next.next = sharedNode
       //       1->3->4
       // 5->6->7->3->4
-      // 0  1  2  3  4
-      const actual = getIntersectingNodeIndex(list1, list2)
-      expect(actual).toEqual(3)
+      const actual = getIntersectingNode(list1, list2)
+      expect(actual).toEqual(sharedNode)
     })
   })
 })
