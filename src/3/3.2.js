@@ -1,33 +1,22 @@
-export class StackNodeWithMin {
-  constructor(data, min) {
-    this.data = data
-    this.next = null
-    this.min = min
-  }
-}
-export class StackWithMin {
+import Stack from '../structures/Stack'
+
+export class StackWithMin extends Stack {
   constructor() {
-    this.top = null
+    super()
+    this.minStack = new Stack()
   }
   push(data) {
-    const min = this.top === null || data < this.top.min ? data : this.top.min
-    let node = new StackNodeWithMin(data, min)
-    node.next = this.top
-    this.top = node
+    const min = this.min()
+    if (min === null || data < min) this.minStack.push(data)
+    super.push(data)
   }
   pop() {
     if (this.top === null) return null
-    const data = this.top.data
-    this.top = this.top.next
-    return data
+    if (this.top.data === this.min()) return this.minStack.pop()
+    return super.pop()
   }
   min() {
-    return this.top === null ? null : this.top.min
-  }
-  peek() {
-    this.top === null ? null : this.top.data
-  }
-  isEmpty() {
-    return this.top === null
+    if (this.minStack.isEmpty()) return null
+    return this.minStack.peek()
   }
 }
