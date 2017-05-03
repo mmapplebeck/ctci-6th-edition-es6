@@ -16,7 +16,7 @@ export default class Stack {
   }
   pop() {
     if (this.top === null) return null
-    let data = this.top.data
+    const data = this.top.data
     this.top = this.top.next
     return data
   }
