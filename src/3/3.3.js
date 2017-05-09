@@ -1,4 +1,5 @@
 import Stack from '../structures/Stack'
+import {pullAt} from 'lodash'
 
 export class StackWithSize extends Stack {
   constructor(maxSize = 10) {
@@ -17,6 +18,18 @@ export class StackWithSize extends Stack {
   }
   full() {
     return this.size === this.maxSize
+  }
+  popBottom() {
+    if (this.isEmpty()) return null
+    if (this.top.next === null) return this.pop()
+    this.size -= 1
+    let node = this.top
+    while (node.next !== null && node.next.next !== null) {
+      node = node.next
+    }
+    const bottom = node.next.data
+    node.next = null
+    return bottom
   }
 }
 
@@ -40,6 +53,22 @@ export class SetOfStacks {
       this.activeStack = this.stacks[this.stacks.length - 1]
     }
     return this.activeStack.pop()
+  }
+  popAt(index) {
+    if (!this.stacks[index]) return null
+    return this.leftShift(index, true)
+  }
+  leftShift(index, removeTop) {
+    const stack = this.stacks[index]
+    let removedItem
+    if (removeTop) removedItem = stack.pop()
+    else removedItem = stack.popBottom()
+    if (stack.isEmpty()) {
+      pullAt(this.stacks, index)
+    } else if (this.stacks.length > index + 1) {
+      stack.push(this.leftShift(index + 1, false))
+    }
+    return removedItem
   }
   peek() {
     return this.activeStack.peek()

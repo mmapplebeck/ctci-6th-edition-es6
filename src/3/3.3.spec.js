@@ -62,6 +62,28 @@ describe('3.3', () => {
       })
     })
 
+    describe('popBottom()', () => {
+      const stack = new StackWithSize(3)
+
+      it('should pop off the bottom and decrease the size', () => {
+        stack.push(1)
+        stack.push(2)
+        stack.push(3)
+        expect(stack.size).toEqual(3)
+        expect(stack.popBottom()).toEqual(1)
+        expect(stack.size).toEqual(2)
+        expect(stack.popBottom()).toEqual(2)
+        expect(stack.size).toEqual(1)
+        expect(stack.popBottom()).toEqual(3)
+        expect(stack.size).toEqual(0)
+      })
+
+      it('should return null if stack is empty and not decrease size', () => {
+        expect(stack.popBottom()).toEqual(null)
+        expect(stack.size).toEqual(0)
+      })
+    })
+
     describe('full()', () => {
       const stack = new StackWithSize(2)
 
@@ -137,6 +159,23 @@ describe('3.3', () => {
         expect(set.pop()).toEqual(null)
         expect(set.stacks.length).toEqual(1)
         expect(set.stacks[0].size).toEqual(0)
+      })
+    })
+
+    describe('popAt()', () => {
+      const set = new SetOfStacks(2)
+      set.push('data1')
+      set.push('data2')
+      set.push('data3')
+      set.push('data4')
+
+      it('should pop at index', () => {
+        expect(set.popAt(1)).toEqual('data4')
+        expect(set.popAt(0)).toEqual('data2')
+        expect(set.popAt(1)).toEqual(null)
+        expect(set.popAt(0)).toEqual('data3')
+        expect(set.popAt(0)).toEqual('data1')
+        expect(set.popAt(0)).toEqual(null)
       })
     })
   })
