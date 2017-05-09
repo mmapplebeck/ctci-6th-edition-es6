@@ -45,6 +45,12 @@ describe('Stack', () => {
         stack.push(1)
         expect(stack.peek()).toEqual(1)
       })
+
+      it('should return itself for chaining', () => {
+        const stack = new Stack()
+        const actual = stack.push(1)
+        expect(actual).toEqual(stack)
+      })
     })
 
     describe('peek()', () => {

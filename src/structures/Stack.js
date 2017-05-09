@@ -13,6 +13,7 @@ export default class Stack {
     let node = new StackNode(data)
     node.next = this.top
     this.top = node
+    return this
   }
   pop() {
     if (this.top === null) return null
