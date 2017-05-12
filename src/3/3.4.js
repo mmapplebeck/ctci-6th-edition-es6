@@ -9,13 +9,9 @@ export default class MyQueue {
     this.stackNewest.push(data)
   }
   shiftStacks() {
-    console.log('shift stacks')
     if (this.stackOldest.isEmpty()) {
-      console.log('if')
       while (!this.stackNewest.isEmpty()) {
-        console.log('not empty')
         this.stackOldest.push(this.stackNewest.pop())  
-        console.log('stackOldest', this.stackOldest)
       }
     }
   }
