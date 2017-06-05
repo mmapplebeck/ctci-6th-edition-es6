@@ -1,18 +1,25 @@
 import expect from 'expect'
-import {isUnique} from './1.1'
+import {isUniqueLogN, sort, isUniqueNLogN} from './1.1'
 
 describe('1.1', () => {
 
-  describe('isUnique()', () => {
-
+  const testUniqueness = fn => {
     it('should return true if all characters are unique', () => {
       const str = 'abcdefg'
-      expect(isUnique(str)).toEqual(true)
+      expect(fn(str)).toEqual(true)
     })
 
     it('should return false if duplicate character', () => {
       const str = 'abcdefga'
-      expect(isUnique(str)).toEqual(false)
+      expect(fn(str)).toEqual(false)
     })
+  }
+
+  describe('isUniqueLogN()', () => {
+    testUniqueness(isUniqueLogN)
+  })
+
+  describe('isUniqueNLogN', () => {
+    testUniqueness(isUniqueNLogN)
   })
 })
