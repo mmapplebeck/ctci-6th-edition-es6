@@ -1,5 +1,5 @@
 import expect from 'expect'
-import {isUniqueLogN, sort, isUniqueNLogN} from './1.1'
+import {isUnique, sort, isUniqueNLogN} from './1.1'
 
 describe('1.1', () => {
 
@@ -15,8 +15,8 @@ describe('1.1', () => {
     })
   }
 
-  describe('isUniqueLogN()', () => {
-    testUniqueness(isUniqueLogN)
+  describe('isUnique()', () => {
+    testUniqueness(isUnique)
   })
 
   describe('isUniqueNLogN', () => {

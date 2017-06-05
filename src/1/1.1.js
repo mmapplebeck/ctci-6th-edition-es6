@@ -1,4 +1,4 @@
-export const isUniqueLogN = str => {
+export const isUnique = str => {
   let chars = {}
   for (let i = 0; i < str.length; i++) {
     if (chars.hasOwnProperty(str[i])) {
