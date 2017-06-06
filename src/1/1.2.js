@@ -18,6 +18,5 @@ export const isPermutation = (str1, str2) => {
       return false
     }
   }
-
-  return Object.keys(chars).length === 0
+  return true
 }
