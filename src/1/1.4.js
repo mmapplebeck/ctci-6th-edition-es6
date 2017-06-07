@@ -1,16 +1,17 @@
 export const isPermutationPalindrome = str => {
-  let chars = {}
+  let counts = {}
   let oddCount = 0
-  for (let i = 0; i < str.length; i++) {
-    if (chars.hasOwnProperty(str[i])) {
-      chars[str[i]] += 1
-      if (chars[str[i]] % 2 === 0) {
+  let letters = str.split(' ').join('')
+  for (let i = 0; i < letters.length; i++) {
+    if (counts.hasOwnProperty(letters[i])) {
+      counts[letters[i]] += 1
+      if (counts[letters[i]] % 2 === 0) {
         oddCount -= 1
       } else {
         oddCount += 1
       }
     } else {
-      chars[str[i]] = 1
+      counts[letters[i]] = 1
       oddCount += 1
     }
   }
