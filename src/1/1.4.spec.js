@@ -7,7 +7,7 @@ describe('1.4', () => {
 
     it('should return true if permutation is palindrome', () => {
       // taco cat
-      expect(isPermutationPalindrome('tact coa')).toEqual(true)
+      expect(isPermutationPalindrome('Tact Coa')).toEqual(true)
     })
 
     it('should return false if permutation is not palindrome', () => {
