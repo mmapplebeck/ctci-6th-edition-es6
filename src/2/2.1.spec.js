@@ -24,7 +24,7 @@ describe('2.1', () => {
   })
 
   describe('removeDupesNoBuffer()', () => {
-    it ('should remove dupes', () => {
+    it('should remove dupes', () => {
       const actual = removeDupesNoBuffer(duped)
       expect(actual).toEqual(expected)
     })

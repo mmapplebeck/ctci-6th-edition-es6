@@ -3,13 +3,14 @@ export default class Node {
     this.data = data
     this.next = null
   }
+
   appendToTail(data) {
-    const end = new Node(data)
-    let n = this
-    while(n.next !== null) {
-      n = n.next
+    const node = new Node(data)
+    let head = this
+    while (head.next !== null) {
+      head = head.next
     }
-    n.next = end
+    head.next = node
     return this
   }
 }
