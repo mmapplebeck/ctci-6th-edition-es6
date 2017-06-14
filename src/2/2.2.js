@@ -1,10 +1,10 @@
 import Node from '../structures/LinkedList'
 
 export const getKthToLast = (linkedList, k) => {
-    let count = 0
-    let head = linkedList
     let runner = linkedList
-    while(runner !== null) {
+    let head = linkedList
+    let count = 0
+    while (runner !== null) {
         if (count === k) {
             head = head.next
         } else {

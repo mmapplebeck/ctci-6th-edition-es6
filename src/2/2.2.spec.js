@@ -12,7 +12,7 @@ describe('2.2', () => {
       .appendToTail(4)
       .appendToTail(5)
 
-    it ('should return the kth to last data', () => {
+    it('should return the kth to last data', () => {
       const actual = getKthToLast(linkedList, 2)
       expect(actual).toEqual(4)
     })
