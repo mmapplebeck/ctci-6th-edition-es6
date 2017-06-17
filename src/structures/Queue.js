@@ -9,6 +9,7 @@ export default class Queue {
   constructor() {
     this.first = null
     this.last = null
+    this.size = 0
   }
   add(data) {
     let item = new QueueNode(data)
@@ -19,6 +20,7 @@ export default class Queue {
     if (this.first === null) {
       this.first = this.last
     }
+    this.size += 1
   }
   remove() {
     if (this.first === null) return null
@@ -27,6 +29,7 @@ export default class Queue {
     if (this.first === null) {
       this.last = null
     }
+    this.size -= 1
     return item.data
   }
   peek() {
