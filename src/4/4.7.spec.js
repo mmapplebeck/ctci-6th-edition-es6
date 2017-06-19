@@ -1,6 +1,5 @@
 import expect from 'expect'
-import Graph, {Node as GraphNode} from '../structures/Graph'
-import * as all from './4.7'
+import {findBuildOrder} from './4.7'
 
 describe('4.7', () => {
 
@@ -19,7 +18,7 @@ describe('4.7', () => {
       const dependencies = [['e', 'f'], ['e', 'a'], ['e', 'c'], ['a', 'f'], ['c', 'f'], ['f', 'b'], ['d', 'g']]
       const expected = ['d', 'e', 'g', 'a', 'c', 'f', 'b']
       
-      expect(all.findBuildOrder(projectNames, dependencies)).toEqual(expected)
+      expect(findBuildOrder(projectNames, dependencies)).toEqual(expected)
     })
   })
 })
