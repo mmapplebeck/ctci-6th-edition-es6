@@ -3,8 +3,6 @@ import {Node as TreeNode} from '../structures/Graph'
 import Queue from '../structures/Queue'
 
 export const toLinkedLists = binaryTreeRoot => {
-  let level = 1
-  let nodeCount = 0
   let linkedLists = []
   const queue = new Queue()
   queue.add(binaryTreeRoot)
