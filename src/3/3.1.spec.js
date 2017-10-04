@@ -1,154 +1,50 @@
 import expect from 'expect'
-import {FixedSizeMultiStack} from './3.1'
-import {fill, times} from 'lodash'
+import {MultiStack} from './3.1'
 
 describe('3.1', () => {
+  describe('MultiStack', () => {
+    const stack = new MultiStack(3)
 
-  describe('FixedSizeMultiStack', () => {
-
-    describe('constructor()', () => {
-
-      it('should return an object with correct properties', () => {
-        const stack = new FixedSizeMultiStack(2, 5)
-        expect(stack.stackCount).toEqual(2)
-        expect(stack.stackSize).toEqual(5)
-        expect(stack.positions).toEqual([0, 0])
-        expect(stack.data).toEqual(fill(Array(10), null))
+    describe('push', () => {
+      it('should push to the correct stack', () => {
+        stack.push(0, '0 first')
+        stack.push(0, '0 second')
+        stack.push(1, '1 first')
+        stack.push(1, '1 second')
+        stack.push(2, '2 first')
+        stack.push(2, '2 second')
+        expect(stack.data[0]).toEqual('0 first')
+        expect(stack.data[1]).toEqual('1 first')
+        expect(stack.data[2]).toEqual('2 first')
+        expect(stack.data[3]).toEqual('0 second')
+        expect(stack.data[4]).toEqual('1 second')
+        expect(stack.data[5]).toEqual('2 second')
       })
-
-      it('should return an object with correct default properties', () => {
-        const stack = new FixedSizeMultiStack()
-        expect(stack.stackCount).toEqual(3)
-        expect(stack.stackSize).toEqual(10)
-      })
-    })
-
-    describe('getPosition()', () => {
-
-      it('should return null if stackId is invalid', () => {
-        const stack = new FixedSizeMultiStack()
-        let position
-        try {
-          position = stack.getPosition(3)
-        } catch(e) {
-          expect(position).toEqual(null)
-        }
-      })
-
-      it('should return position', () => {
-        const stack = new FixedSizeMultiStack
-        expect(stack.getPosition(0)).toEqual(0)
-        expect(stack.getPosition(1)).toEqual(0)
-        expect(stack.getPosition(2)).toEqual(0)
-        stack.push(1, 'data')
-        stack.push(2, 'data')
-        stack.push(2, 'data')
-        expect(stack.getPosition(0)).toEqual(0)
-        expect(stack.getPosition(1)).toEqual(1)
-        expect(stack.getPosition(2)).toEqual(2)
+      it('should not push to an invalid stack', () => {
+        stack.push(4, 'invalid')
+        expect(stack.data.length).toEqual(6)
       })
     })
 
-    describe('checkFull()', () => {
-
-      it('should return false if not full', () => {
-        const stack = new FixedSizeMultiStack()
-        expect(stack.checkFull(0)).toEqual(false)
-        times(9, () => stack.push(0, 'data'))
-        expect(stack.checkFull(0)).toEqual(false)
-      })
-
-      it('should return true if stack is full', () => {
-        const stack = new FixedSizeMultiStack()
-        times(10, () => stack.push(0, 'data'))
-        expect(stack.checkFull(0)).toEqual(true)
+    describe('pop', () => {
+      it('should pop off the correct stack', () => {
+        expect(stack.pop(0)).toEqual('0 second')
+        expect(stack.pop(0)).toEqual('0 first')
+        expect(stack.pop(0)).toEqual(null)
       })
     })
 
-    describe('checkEmpty()', () => {
-
-      it('should return false if not empty', () => {
-        const stack = new FixedSizeMultiStack()
-        stack.push(0, 'data')
-        expect(stack.checkFull(0)).toEqual(false)
-      })
-
-      it('should return true if empty', () => {
-        const stack = new FixedSizeMultiStack()
-        expect(stack.checkEmpty(0)).toEqual(true)
-      })
-    })
-
-    describe('push()', () => {
-
-      it('should push a new item to the specified stack', () => {
-        const stack = new FixedSizeMultiStack()
-        stack.push(0, 'data1')
-        expect(stack.peek(0)).toEqual('data1')
-        stack.push(0, 'data2')
-        expect(stack.peek(0)).toEqual('data2')
-      })
-
-      it('should throw an error if the stack is full', () => {
-        const stack = new FixedSizeMultiStack()
-        try {
-          times(20, () => stack.push(0, 'data'))
-        } catch(e) {
-          expect(stack.getPosition(0)).toEqual(10)
-        }
-      })
-    })
-
-    describe('pop()', () => {
-
-      it('should pop an item from the specified stack', () => {
-        const stack = new FixedSizeMultiStack()
-        stack.push(0, 'data1')
-        stack.push(0, 'data2')
-        expect(stack.pop(0)).toEqual('data2')
-        expect(stack.pop(0)).toEqual('data1')
-      })
-
-      it('should throw an error and return null if popping from an empty stack', () => {
-        const stack = new FixedSizeMultiStack()
-        let data
-        try {
-          data = stack.pop(0)
-        } catch(e) {
-          expect(data).toEqual(null)
-        }
-      })
-    })
-
-    describe('peek()', () => {
-
-      it('should return the top item in the stack', () => {
-        const stack = new FixedSizeMultiStack()
-        stack.push(0, 'data1')
-        expect(stack.peek(0)).toEqual('data1')
-        stack.push(0, 'data2')
-        expect(stack.peek(0)).toEqual('data2')
-        stack.push(1, 'data3')
-        expect(stack.peek(1)).toEqual('data3')
-      })
-
-      it('should return null if stack is empty', () => {
-        const stack = new FixedSizeMultiStack()
+    describe('peek', () => {
+      it('should return top of stack', () => {
         expect(stack.peek(0)).toEqual(null)
+        expect(stack.peek(1)).toEqual('1 second')
       })
     })
 
-    describe('isEmpty()', () => {
-
-      it('should return true if stack is empty', () => {
-        const stack = new FixedSizeMultiStack()
+    describe('isEmpty', () => {
+      it('should return whether stack is empty', () => {
         expect(stack.isEmpty(0)).toEqual(true)
-      })
-
-      it('should return false if stack is not empty', () => {
-        const stack = new FixedSizeMultiStack()
-        stack.push(0, 'data')
-        expect(stack.isEmpty(0)).toEqual(false)
+        expect(stack.isEmpty(1)).toEqual(false)
       })
     })
   })

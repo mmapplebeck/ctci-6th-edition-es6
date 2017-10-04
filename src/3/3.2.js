@@ -3,20 +3,23 @@ import Stack from '../structures/Stack'
 export class StackWithMin extends Stack {
   constructor() {
     super()
-    this.minStack = new Stack()
+    this.mins = new Stack()
   }
   push(data) {
-    const min = this.min()
-    if (min === null || data < min) this.minStack.push(data)
+    if (this.mins.isEmpty() || data <= this.mins.peek()) this.mins.push(data)
     super.push(data)
   }
-  pop() {
-    if (this.top === null) return null
-    if (this.top.data === this.min()) return this.minStack.pop()
+  pop(data) {
+    if (this.peek() === this.mins.peek()) this.mins.pop()
     return super.pop()
   }
+  peek() {
+    return super.peek()
+  }
+  isEmpty() {
+    return super.isEmpty()
+  }
   min() {
-    if (this.minStack.isEmpty()) return null
-    return this.minStack.peek()
+    return this.mins.peek()
   }
 }
